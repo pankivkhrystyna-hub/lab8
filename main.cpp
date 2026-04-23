@@ -30,6 +30,19 @@ void split_by_parity(const std::vector<T>& src, std::vector<T>& even, std::vecto
         else odd.push_back(*it);
     }
 }
+
+template <typename T>
+bool is_palindrome(const std::deque<T>& dq) {
+    if (dq.empty()) return true;
+    auto left = dq.begin();
+    auto right = dq.end();
+    --right;
+    while (left < right) {
+        if (!(*left == *right)) return false;
+        ++left; --right;
+    }
+    return true;
+}
 int main() {
     std::array<int, 3> a1 = {1, 5, 9};
     std::array<int, 2> a2 = {2, 4};
@@ -43,6 +56,8 @@ int main() {
     split_by_parity(shop, even_p, odd_p);
     std::cout << "\nEven Products: " << even_p.size();
 
-    
+    std::deque<char> d = {'r', 'a', 'd', 'a', 'r'};
+    std::cout << "\nIs 'radar' palindrome? " << (is_palindrome(d) ? "Yes" : "No") << std::endl;
+
     return 0;
 }
